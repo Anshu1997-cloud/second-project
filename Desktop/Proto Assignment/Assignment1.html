@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function TataNexonModel(chassis,BodyColour,EngineType,InteriorDesign){
+        this.chassis = chassis
+        this.BodyColour = BodyColour
+        this.EngineType = EngineType
+        this.InteriorDesign = InteriorDesign
+       }
+       TataNexonModel.prototype.shade = function(){
+        this.BodyColour = "Mat - Black"
+       }
+       TataNexonModel.prototype.EngineType = function(){
+        this.EngineType = this.EngineType*2
+       }
+       TataNexonModel.prototype.chassis = function(){
+        this.chassis = "Monocoque"
+        console.log(this.chassis)
+       }
+       TataNexonModel.prototype.InteriorDesign = function(){
+        this.InteriorDesign = "Leather-fabricated"
+       }
+
+       function TataNexonFaceLift(chassis,BodyColour,EngineType,InteriorDesign,Safety,EmissionNorms){
+
+        TataNexonModel.call(this,BodyColour,EngineType,InteriorDesign )
+
+        this.Safety = Safety
+        this.EmissionNorms = EmissionNorms
+       }
+
+        TataNexonFaceLift.prototype = Object.create(TataNexonModel)
+
+       TataNexonFaceLift.prototype.GlobalSafety= function(){
+        console.log(`${this.chassis} is best in class.`)
+       }
+
+       TataNexonFaceLift.prototype.Bs6EmissionNorms = function(){
+        console.log(`${this.EngineType} is fuel efficient and best in class.`)
+       }
+
+       let NewUpcomingproject = new TataNexonFaceLift("Monocoque","Mat-black","Vxi-turbo","italian","Ads-inbuild","bS-6")
+       console.log(NewUpcomingproject)
+       NewUpcomingproject.GlobalSafety()
+      NewUpcomingproject= shade()
+
+
+// //     Define a base object for generic automobiles
+// const Automobile = {
+//   start() {
+//     console.log("Starting the automobile...");
+//   },
+//   stop() {
+//     console.log("Stopping the automobile...");
+//   },
+// };
+
+// // Create specialized objects for specific types of automobiles
+
+// // Car constructor function
+// function Car(make, model) {
+//   this.make = make;
+//   this.model = model;
+// }
+
+// // Inherit from the base Automobile object using Object.create()
+// Car.prototype = Object.create(Automobile);
+
+// // Truck constructor function
+// function Truck(make, model, capacity) {
+//   this.make = make;
+//   this.model = model;
+//   this.capacity = capacity;
+// }
+
+// // Inherit from the base Automobile object using Object.create()
+// Truck.prototype = Object.create(Automobile);
+
+// // Create instances of Car and Truck
+// const myCar = new Car("Toyota", "Camry");
+// const myTruck = new Truck("Ford", "F-150", 1000);
+
+// // Test the inherited methods
+// myCar.start(); // Starting the automobile...
+// myCar.stop();  // Stopping the automobile...
+
+// myTruck.start(); // Starting the automobile...
+// myTruck.stop();  // Stopping the automobile...
+
+// // You can also add more methods or properties to the specialized objects as needed.
+
+    </script>
+</body>
+</html>
