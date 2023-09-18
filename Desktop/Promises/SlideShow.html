@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+      #slide-container{
+        position: relative;
+            max-width: 600px;
+            margin: auto;
+    }
+    img{
+             width: 100%;
+            height: auto;
+            display: none;
+    }
+    .container{
+        text-align: center;
+            margin-top: 10px;
+    }
+</style>
+<body>
+    <div class = "container">
+        <div  id = "slide-container">
+          <img src="https://play-lh.googleusercontent.com/2Ac0PBmc0KikiVuNSGIhmEG8sbfSgZdfF-lu1d16FVTlOvfviWUK6aPPJSDTrMvs26w " alt="">
+          <img src="https://wallpaperaccess.com/full/880897.jpg " alt="">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8vo3J206dvN4mZlwdMutBbWZhx_t1RX96uTxpTrF1tpkoPPP2w5wVrAQgcHSlWcDQ5ew&usqp=CAU " alt="">
+          <img src="https://img.mensxp.com/media/content/2020/Aug/Preview-Of-Mafia-Definitive-Edition-1200x900_5f477d451916c.jpeg " alt="">
+          <img src="https://images.squarespace-cdn.com/content/v1/55ef0e29e4b099e22cdc9eea/1593106709109-17BCHQLJE6ZK99BDINDT/Mafia-The-City-of-Lost-Heaven-Remake-data-vyhoda.jpg" alt="">
+          <img src="https://media.gettyimages.com/id/117146450/photo/mafia-member.jpg?s=612x612&w=gi&k=20&c=5TPeTqvTqAwRiEdYJciR0iTqYt3XqrWHBWVI2SXl5IA=" alt="">
+          <img src="https://thumbs.dreamstime.com/b/man-black-2657908.jpg" alt="">
+          <img src="https://media.istockphoto.com/id/108129617/photo/spy-portrait.jpg?s=612x612&w=is&k=20&c=QDLrDUGptDLZBooj6ywuLeX-HVKzsJeSMI7jZU2R-b4=" alt="">
+          <img src="https://t3.ftcdn.net/jpg/01/43/15/82/360_F_143158260_LRsB5vhqgvYj9ap9n40mrr9t9rbMPnga.jpg" alt="">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFdj8s0Vt6fWWpgZthaMBSwW97ReF7CD-SR1ZeQvI9e3y-k4VIX5WZa-fUhgAn_BuwjrY&usqp=CAU" alt="">
+          <img src="https://e1.pxfuel.com/desktop-wallpaper/342/361/desktop-wallpaper-mafia-aesthetic-mafia.jpg" alt="">
+          <img src="https://beardo.in/cdn/shop/products/3_efe3393e-90f6-41a6-9099-620dcb51a8bb.jpg?v=1691489281&width=1946" alt="">
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe-N5mL96W8j83MppGrmj89-YnIIoFI21kdkmq8JP5eLUokfoG0mj7a9lVLo5knxx-D7o&usqp=CAU" alt="">
+          <img src="https://www.jeumobi.com/download/mafia-city/assets/image/mafia-city.jpg" alt="">
+          <img src="https://media.istockphoto.com/id/181893123/photo/poker.jpg?s=612x612&w=0&k=20&c=Vypshcg-QawJ0BslNIQ9IYzqAEU31jsmFHa6q-GsWD0=" alt="">
+          <img src="https://cdn.xxl.thumbs.canstockphoto.com/fine-portrait-of-caucasian-gangster-stock-image_csp7419126.jpg" alt="">
+          <img src="https://media.gettyimages.com/id/1126064782/photo/unknown-redhead-gangster-man.jpg?s=612x612&w=gi&k=20&c=zIsfn2HyNp0vKfHdHD6du-iOfuWclNWULg-8KJ14s04=" alt="">
+          <img src="https://media.gettyimages.com/id/157562782/photo/mysterios-elegant-senior.jpg?s=612x612&w=gi&k=20&c=8M3dGGk5NPrnuWJ5tHNYFsHpRPA_itd2O-vvV60-iF4=" alt="">
+        </div>
+       <button onclick = "toggleSlideShow()">Start/Stop</button>
+       <button onclick = "nextSlide()">Next</button>
+       <button onclick = "previousSlide()">Previous</button>
+       <button onclick = "resetSlide()">Reset</button>
+    </div>
+</body>
+<script>
+    let slides = document.querySelectorAll("#slide-container > img");
+    let slideIndex = 0;
+    let slideInterval;
+
+    function SlideShow(index){
+       
+        slides.forEach((slide , i) => {
+            if( i == index ){
+                slide.style.display = 'block'
+            }
+            else{
+                slide.style.display = 'none'
+            }
+        })
+    }
+
+    function StartSlideShow(){
+
+        slideInterval = setInterval(() => {
+         slideIndex = (slideIndex + 1) % slides.length
+         SlideShow(slideIndex);
+         console.log(slideIndex)
+        },2000)
+    }
+
+    function StopSlideShow(){
+        clearInterval(slideInterval);
+    }
+
+    function toggleSlideShow(){
+        if(slideInterval){
+            StopSlideShow();
+            slideInterval = null;
+        }
+        else{
+            StartSlideShow();
+        }
+    }
+
+    function nextSlide(){
+        StopSlideShow();
+        slideIndex = (slideIndex + 1) % slides.length;
+        SlideShow(slideIndex)
+    }
+
+    function previousSlide(){
+        clearInterval(slideInterval);
+        slideIndex =(slideIndex -1 + slides.length) % slides.length;
+        SlideShow(slideIndex);
+    }
+    function resetSlide(){
+        clearInterval(slideInterval);
+        slideIndex = "";
+        SlideShow(slideIndex)
+    }
+    SlideShow(slideIndex)
+</script>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #slide-container{
+        position: relative;
+            max-width: 800px;
+            margin: auto;
+    }
+    img{
+             width: 100%;
+            height: auto;
+            display: none;
+    }
+    .container{
+        text-align: center;
+            margin-top: 10px;
+    }
+</style>
+<body>
+    <div class = "container">
+        <div id = "slide-container">
+       <img src="https://wallpapercave.com/dwp1x/wp1939266.jpg " alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457224.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457226.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp1939181.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457228.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457229.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457230.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457232.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp1521243.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp1848856.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457241.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457246.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp2457247.jpg" alt="">
+       <img src="https://wallpapercave.com/dwp1x/wp1964966.jpg" alt="">
+       <img src=" https://wallpapercave.com/dwp1x/wp2457277.jpg" alt="">
+    </div>
+        <button onclick = "toggleSlideShow()">Start/Stop</button>
+        <button class = "Btn" onclick = "nextSlide()">Next</button>
+        <button  class = "Btn" onclick = "previousSlide()">Previous</button>
+    </div>
+</body>
+<script>
+    let slideIndex = 0;
+  let slides = document.querySelectorAll('#slide-container > img');
+  let slideInterval;
+
+    function SlideShow(index){
+        slides.forEach((slide , i) =>{
+            if(i == index){
+              slide.style.display = 'block';
+            }
+            else{
+                slide.style.display = 'none';
+            }
+         })
+    }
+
+    function StartSlideShow(){
+
+        slideInterval = setInterval(() =>{
+          slideIndex = (slideIndex + 1) % slides.length
+            SlideShow(slideIndex)
+            console.log(slideIndex)
+        },2000)
+    }
+
+    function StopSlideShow(){
+    clearInterval(slideInterval)
+ }
+
+     function toggleSlideShow(){
+        if(slideInterval){
+            StopSlideShow();
+            slideInterval = null;
+        }
+        else{
+            StartSlideShow()
+        }
+     }
+
+     function nextSlide(){
+        StopSlideShow()
+        slideIndex = (slideIndex + 1) % slides.length
+        SlideShow(slideIndex)
+     }
+     function previousSlide(){
+        clearInterval(slideInterval);
+        slideIndex = (slideIndex - 1 + slides.length) % slides.length;
+        SlideShow(slideIndex)
+     }
+    SlideShow(slideIndex)
+</script>
+</html>

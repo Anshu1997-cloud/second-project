@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+      #Imgsrc{
+        position: relative;
+            max-width: 800px;
+            margin: auto;
+            
+      }
+      img{
+        width: 50%;
+        height: 60%;
+        position: absolute;
+        top : 50%;
+        left  : 50%;
+      transform: translate(-50%, -50%);
+      }
+      #Food-ID{
+        position: absolute;
+            top: 10px;
+            right: 10px
+      }
+</style>
+<body>
+   <h1>Welcome To Online Food Store</h1>
+   <p>Please Select that Items</p>
+   <br><br>
+   <div id  = "food-Item">
+    Burger<input type="checkbox"  value ="Burger">
+    Pizza<input type="checkbox"   value ="Pizza">
+    Momos<input type="checkbox"      value ="Momos">
+    Drinks<input type="checkbox"       value ="Drinks">
+   </div>
+    <br><br>
+    <button id = "Order-food">Order Food</button>
+    <div id = "ImgSrc">
+        <img id = "Img" src="" alt="">
+    </div>
+    <div id ="Food-ID"></div>
+</body>
+<script>
+  let orderBtn = document.getElementById('Order-food')
+
+  orderBtn.addEventListener("click" , () => {
+    let selectedFood = [];
+    let checkbox = document.querySelectorAll('input[type = "checkbox"]');
+    checkbox.forEach((checkbox) =>{
+        if(checkbox.checked){
+            selectedFood[0]=checkbox.value
+        }
+    })
+    if(selectedFood.length == 0){
+        alert('Please select at least one food Item.');
+        return;
+    }
+    let Pizza = document.getElementById("Pizza");
+    let Burger = document.getElementById("Burger");
+    let Momos = document.getElementById("Momos");
+    let Drinks = document.getElementById("Drinks");
+    let Image = document.getElementById("Img");
+    let OrderIdElement = document.getElementById('Food-ID');
+
+ setTimeout(() => {
+    for(let i = 0; i<selectedFood.length; i++){
+        if(selectedFood[i] == "Pizza"){
+            Image.style.display = "block"
+            Image.src = "https://img.freepik.com/fotos-kostenlos/frisch-gebackene-pizza-mit-mozzarella-und-generativer-tomaten-ai_188544-46434.jpg?w=1380&t=st=1695012005~exp=1695012605~hmac=4de29f05bf7778159e3307dcf26bfa397b1eb0d740643fb4f704fba1c9f5377a";
+        }
+       else  if(selectedFood[i] == "Burger"){
+        Image.src = 'https://img.freepik.com/fotos-kostenlos/leckere-burger-isoliert-auf-weissem-hintergrund-frischer-hamburger-fastfood-mit-rindfleisch-und-kaese_90220-1063.jpg?w=740&t=st=1695011956~exp=1695012556~hmac=fd1d62efea19faf9dbabd71c582c7a55a0a4638b0bcc17389546673afebc4c98';
+        }
+        else  if(selectedFood[i] == "Momos"){
+            Image.src = 'https://img.freepik.com/fotos-kostenlos/seitenansicht-der-traditionellen-asiatischen-knoedel-mit-fleisch-und-gemuese-die-mit-sojasauce-auf-einem-teller-auf-rustikal-serviert-werden_141793-11562.jpg?w=1060&t=st=1695012039~exp=1695012639~hmac=7151dca60af2021a836c8c95fbf0be7079a1a3cdb000a4dbf60862e3e48c04d6 ';
+        }
+        else  if(selectedFood[i] == "Drinks"){
+          Image.src  = 'https://img.freepik.com/fotos-premium/spritzen-sie-im-glas-kolabaum-mit-eis-auf-grauem-steigungshintergrund_96064-200.jpg?w=740 ';
+        }
+        else{
+            Image.style.display ='none';
+
+        }
+    }
+    let OrderId = Math.floor(Math.random() * 1000) + 1
+    OrderIdElement.innerText = `Order ID : ${OrderId}`;
+ },1000)
+  })
+</script>
+</html>
