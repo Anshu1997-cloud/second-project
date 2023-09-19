@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+     function phone_protoType(os,brand,camera,speaker,hardware){
+        this.os = os
+        this.brand = brand
+        this.camera = camera
+        this.speaker = speaker
+        this.hardware = hardware
+
+     }
+
+     phone_protoType.prototype.Sound_test = function(){
+        
+        console.log("Phone rang with tring tring.....")
+     }
+
+     phone_protoType.prototype.Build_in = function(){
+
+        console.log("phone has hard build with gorilla-6 protection")
+     }
+
+     let Phone1 =  new phone_protoType("ios","iphone-14",48,"stereoSpeaker","steel-frame")
+     console.log(Phone1)
+     Phone1.Build_in()
+     Phone1.Sound_test()
+
+     function Samsung(os,brand,camera,speaker,hardware,Iprating,screen ){
+
+        phone_protoType.call(this,os,brand,camera,speaker,hardware)
+
+        this.Iprating = Iprating
+        this.screen = screen
+     }
+
+     Samsung.prototype.color = function(){
+        console.log("the device has unique colors")
+     }
+
+     Samsung.prototype.features = function(){
+        console.log("the device come with day time screen ")
+     }
+     Object.setPrototypeOf(Samsung.prototype,phone_protoType.prototype)
+
+     let Phone2 = new Samsung("android" , "samsung" , "59mega-pixels" , "stereo-speaker" , "Solid-Build" , "IP-6","OLED")
+     console.log(Phone2)
+     Phone2.color()
+     Phone2.features()
+</script>
+</html>

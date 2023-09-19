@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let NetworkRequestSuccessful = true;
+
+    let myPromise = new Promise(function(resolve,reject) {
+        
+        setTimeout(() =>{
+          
+            if(NetworkRequestSuccessful){
+                let  data = [
+                { name : "xYz" , id : 6768678},
+                { name : "aBc" , id : 989808},
+                 {name : "eFg" , id : 134242},
+            ]
+                 resolve(data)
+            }
+            else{
+                reject({message : "request failed"})
+            }
+        },2000)
+    })
+
+  console.log(myPromise)
+
+    myPromise.then(function(res){
+        console.log(res)
+    })
+    .catch(function(err){
+        console.log(err)
+    })
+</script>
+</body>
+</html>

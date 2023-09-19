@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+  body {
+     font-family: Arial, sans-serif;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     height: 100vh;
+    }
+    .cont{
+      text-align: center;
+      
+
+    }
+    .processing {
+      display: none; 
+      color: orange;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .success {
+      display: none; 
+      color: green;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .failure {
+      display: none; 
+      color: red;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .cont>button{
+      /* color: blue; */
+      font-size: 20px;
+      font-weight: bolder;
+    }
+</style>
+<body>
+    <div id = "container">
+    <div id ="processingUI" class = "processing">Processing Payment</div>
+    <div id = "successUI" class = "success">Payment Successfull</div>
+    <div id = "failureUI" class = "failure">Payment Failed , Please Try Again</div>
+    <button onclick = "processPayment()">Process Payment</button>
+    </div>
+</body>
+<script>
+
+function simulateProcessing(){
+    return new Promise((resolve,reject) => {
+      
+        setTimeout(() => {
+        let success = Math.random() < 0.5
+        if(success){
+          resolve();
+        }
+        else{
+            reject();
+        }
+        },2000)
+    })
+}
+
+function showProcessingUI(){
+    document.getElementById('processingUI').style.display = "block";
+    document.getElementById('successUI').style.display = "none";
+    document.getElementById('failureUI').style.display = "none";
+}
+
+function showSuccessUI(){
+    document.getElementById('processingUI').style.display = "none";
+    document.getElementById('successUI').style.display = "block";
+    document.getElementById('failureUI').style.display = "none";
+}
+
+function showFailureUI(){
+    document.getElementById('processingUI').style.display = "none";
+    document.getElementById('successUI').style.display = "none";
+    document.getElementById('failureUI').style.display = "block";
+}
+
+function processPayment (){
+    showProcessingUI();
+    simulateProcessing()
+    .then(() =>{
+        showSuccessUI()
+    })
+    .catch(() =>{
+        showFailureUI()
+    })
+}
+</script>
+</html>
