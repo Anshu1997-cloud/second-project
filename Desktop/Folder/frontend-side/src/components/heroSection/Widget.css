@@ -1,0 +1,27 @@
+.widgetSliderWrapper {
+    position: relative;
+    margin: 0 0 0 10px;
+    text-align: center;
+}
+
+.widgetSliderWrapper .widgetSliderInner {
+    position: relative;
+    margin: 0 25px 0 0;
+    text-align: center;
+    min-width: 54px;
+}
+
+@media screen and (min-width: 769px){
+.widgetSliderWrapper .widgetSliderInner {
+    position: relative;
+    margin: 0 66px 0 0;
+    text-align: center;
+    min-width: 108px;
+}
+}
+
+@media screen and (min-width: 769px){
+.widgetSliderWrapper ::-webkit-scrollbar {
+    display: none;
+}
+}

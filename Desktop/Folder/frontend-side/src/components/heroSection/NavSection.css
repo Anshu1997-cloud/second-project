@@ -1,0 +1,9 @@
+
+ul{
+    display: flex;
+    justify-content:space-evenly;
+    font-size: 25px;
+    padding: 21px 24px;
+    font-family: sans-serif;
+    cursor: pointer;
+}

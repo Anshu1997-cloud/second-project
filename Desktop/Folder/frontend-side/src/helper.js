@@ -1,0 +1,1 @@
+export const BASE_URL = "https://gray-gentle-caridea.cyclic.app"
