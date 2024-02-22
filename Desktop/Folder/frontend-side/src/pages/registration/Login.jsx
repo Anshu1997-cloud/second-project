@@ -1,9 +1,12 @@
 import { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import myContext from '../../context/data/myContext'
+import myContext from '../../context/data/myContext';
+import { auth } from '../../server/server-side/firebase/FirebaseConfig';
+import {signInWithEmailAndPassword} from 'firebase/auth'
 import { toast } from 'react-toastify';
-import { FaSpinner } from 'react-icons/fa';
-import { BASE_URL } from '../../helper';
+import Loader from '../../components/Loader/Loader'
+
+
 
 function Login() {
    const context = useContext(myContext);
@@ -17,28 +20,20 @@ function Login() {
    const login = async() => {
     setLoading(true)
        try{
-           
-        const response = await fetch( `${BASE_URL}/login` , {
-            method: 'POST',
-            headers: {
-               'Content-Type' : 'application/json',
-            },
-            body: JSON.stringify({
-                email,
-                password,
-             }),
-        })
-        if(response.ok){
-            const newUser = await response.json();
-            console.log(newUser)
-            toast.success("Login successful")
-            localStorage.setItem('user' , JSON.stringify(newUser))
-            navigate('/')
-            setLoading(false)
-        }else{
-            toast.error('Failed to Login')
-            setLoading(false)
-        }
+          const result = await signInWithEmailAndPassword(auth, email, password)
+           toast.success("Login Successful",{
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+           })
+           localStorage.setItem('user' , JSON.stringify(result))
+           navigate('/')
+           setLoading(false)
        }catch(error){
           console.log(error)
           setLoading(loading)
@@ -47,7 +42,7 @@ function Login() {
 
     return (
         <div className=' flex justify-center items-center h-screen'>
-               {loading && <FaSpinner className="animate-spin text-3xl text-white" />} {/* Loader icon */}
+               {loading && <Loader/>} 
             <div className=' bg-gray-800 px-10 py-10 rounded-xl '>
                 <div className="">
                     <h1 className='text-center text-white text-xl mb-4 font-bold'>Login</h1>

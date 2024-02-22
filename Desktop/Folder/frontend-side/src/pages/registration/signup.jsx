@@ -1,27 +1,20 @@
-import { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import myContext from '../../context/data/myContext';
 import { toast } from 'react-toastify';
-import { FaSpinner } from 'react-icons/fa';
-import { BASE_URL } from '../../helper';
+import  Loader from '../../components/Loader/Loader';
+import { createUserWithEmailAndPassword} from 'firebase/auth';
+import { auth, fireDB } from  '../../server/server-side/firebase/FirebaseConfig';
+import {Timestamp,collection, addDoc}  from 'firebase/firestore';
 
 
 function Signup() {
-    // const [backendData ,  setBackendData]  = useState([{}])
    const[username, setUserName] = useState("");
    const[email , setEmail] = useState("");
    const[password, setPassword] = useState("");
 
+ const context = useContext(myContext);
 
-//    useEffect(() => {
-//     fetch('http://localhost:8080/register')
-//       .then((response) => response.json())
-//       .then((data) => {
-//         setBackendData(data);
-//       });
-//   }, []);
-
-   const context = useContext(myContext);
    const{loading, setLoading} = context;
 
    const signup = async() => {
@@ -29,35 +22,30 @@ function Signup() {
        if(username === "" || email === "" || password === ""){
          return toast.error("All fields are required")
        }
-       try{
-         const response = await fetch(`${BASE_URL}/register` ,{
-              method: 'POST',
-              headers: {
-                 'Content-Type' : 'application/json',
-              },
-              body: JSON.stringify({
-                 username,
-                 email,
-                 password,
-              }),
-         }); 
-         if(response.ok){
-             const newUser = await response.json();
-             console.log(newUser)
-             toast.success("Signup successful")
-             setLoading(false)
-         }else{
-             toast.error('Failed to create a new user')
-             setLoading(false)
-         }
-       }catch(error){
-          console.log('Error during signup:' , error)
-       }
+        try{
+         const users = await  createUserWithEmailAndPassword(auth, email, password)
+          const user = {
+              username : username,
+              uid : users.user.uid,
+              email : users.user.email,
+              time: Timestamp.now()
+          }
+          const userRef = collection(fireDB, "users") 
+          await addDoc(userRef, user);
+          toast.success("Signup successfully")
+          setUserName("");
+          setEmail("");
+          setPassword("");
+            setLoading(false);
+        }catch(error){
+           console.log(error)
+           setLoading(false)
+        }
    };
 
     return (
         <div className=' flex justify-center items-center h-screen'>
-            {loading && <FaSpinner className="animate-spin text-3xl text-white" />} {/* Loader icon */}
+            {loading && <Loader/>} {/* Loader icon */}
             <div className=' bg-gray-800 px-10 py-10 rounded-xl '>
                 <div className="">
                     <h1 className='text-center text-white text-xl mb-4 font-bold'>Signup</h1>

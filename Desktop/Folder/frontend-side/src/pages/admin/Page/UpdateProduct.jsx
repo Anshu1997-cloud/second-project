@@ -3,7 +3,7 @@ import myContext from '../../../context/data/myContext'
 
 function UpdateProduct() {
     const context = useContext(myContext);
-    const{products, setProducts, getProduct} = context
+    const{products, setProducts, updateProduct } = context
     return (
         <div>
             <div className=' flex justify-center items-center h-screen'>
@@ -13,7 +13,7 @@ function UpdateProduct() {
                     </div>
                     <div>
                         <input type="text"
-                        value = {products.title}
+                        value={products.title}
                         onChange={(e) => setProducts({...products, title: e.target.value})}
                             name='title'
                             className=' bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none'
@@ -22,7 +22,7 @@ function UpdateProduct() {
                     </div>
                     <div>
                         <input type="text"
-                        value = {products.price}
+                        value={products.price}
                         onChange={(e) => setProducts({...products, price: e.target.value})}
                             name='price'
                             className=' bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none'
@@ -31,35 +31,34 @@ function UpdateProduct() {
                     </div>
                     <div>
                         <input type="text"
-                        value = {products.imageUrl}
-                        onChange={(e) => setProducts({...products, imageUrl: e.target.value})}
-                            name='imageurl'
+                        value={products.imageUrl}
+                        onChange={(e) => setProducts({...products , imageUrl: e.target.value})}
+                            name='imageUrl'
                             className=' bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none'
                             placeholder='Product imageUrl'
                         />
                     </div>
                     <div>
                         <input type="text"
-                        value = {products.category}
-                        onChange={(e) => setProducts({...products, category: e.target.value})}
+                          value={products.category}
+                          onChange={(e) => setProducts({...products , category: e.target.value})}
                             name='category'
                             className=' bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none'
                             placeholder='Product category'
                         />
                     </div>
                     <div>
-                       <textarea cols="30" rows="10" 
-                       value={products.description}
-                       onChange={(e) => setProducts({...products, description: e.target.value})}
-                       name='description'
+                        <input type="text"
+                          value={products.description}
+                          onChange={(e) => setProducts({...products , description: e.target.value})}
+                            name='description'
                             className=' bg-gray-600 mb-4 px-2 py-2 w-full lg:w-[20em] rounded-lg text-white placeholder:text-gray-200 outline-none'
-                            placeholder='Product description'>
-
-                       </textarea>
+                            placeholder='Product description'
+                        />
                     </div>
                     <div className=' flex justify-center mb-3'>
                         <button
-                        onClick={getProduct}
+                        onClick={updateProduct}
                             className=' bg-yellow-500 w-full text-black font-bold  px-2 py-2 rounded-lg'>
                             Update Product
                         </button>
